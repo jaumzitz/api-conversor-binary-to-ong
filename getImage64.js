@@ -12,9 +12,16 @@ async function getImage64(chid) {
 
     try {
         const response = await axios.get(url)
-        return response.data.img64   
+
+        if (response.data.img64) {
+            return response.data.img64   
+        } else {
+            throw Error('Imagem não existe. CHID ' + chid)
+        }
+
+        
     } catch (error) {
-        console.error('Não foi possível obter o base64 da imagem')
+        console.error('Não foi possível obter o base64 da imagem: CHID ' + chid)
         throw error;
     }
     
